@@ -93,6 +93,24 @@ app.get("/", (req, res) => {
   res.send("route is working! yea!");
 });
 
+// get the product
+app.get("/api/v1/product", async (req, res, next) => {
+  try {
+    const product = await Product.find({});
+    res.status(200).json({
+      status: "success",
+      message: "Data Find Properly",
+      data: product,
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "Failed",
+      message: "Data Not Be Find ",
+      error: error.message,
+    });
+  }
+});
+
 // posting to database
 app.post("/api/v1/product", async (req, res, next) => {
   try {
